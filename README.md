@@ -323,6 +323,6 @@ Body:
 
 ## Author
 
-**Created for learning Go REST APIs**
+**Createdby Ramadi Sadikin for learning Go REST APIs**
 
 Last Updated: January 22, 2026
