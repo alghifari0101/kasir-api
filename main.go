@@ -126,7 +126,7 @@ func deleteProduk(w http.ResponseWriter, r *http.Request) {
 // ambil kategori by ID
 func getCategoryByID(w http.ResponseWriter, r *http.Request) {
 	//extract ID dari URL path
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/categories/")
+	idStr := strings.TrimPrefix(r.URL.Path, "/categories/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		http.Error(w, "Kategori ID Tidak Valid", http.StatusBadRequest)
@@ -148,7 +148,7 @@ func getCategoryByID(w http.ResponseWriter, r *http.Request) {
 // PUT localhost:8080/api/categories/{id}
 func updateCategory(w http.ResponseWriter, r *http.Request) {
 	//get id dari request
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/categories/")
+	idStr := strings.TrimPrefix(r.URL.Path, "/categories/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		http.Error(w, "Kategori ID Tidak Valid", http.StatusBadRequest)
@@ -179,7 +179,7 @@ func updateCategory(w http.ResponseWriter, r *http.Request) {
 }
 func deleteCategory(w http.ResponseWriter, r *http.Request) {
 	// get id
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/categories/")
+	idStr := strings.TrimPrefix(r.URL.Path, "/categories/")
 	// ganti id int
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -243,7 +243,7 @@ func main() {
 	// GET localhost:8080/api/categories/{id}
 	// PUT localhost:8080/api/categories/{id}
 	// DELETE localhost:8080/api/categories/{id}
-	http.HandleFunc("/api/categories/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/categories/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "GET" {
 			getCategoryByID(w, r)
 		} else if r.Method == "PUT" {
@@ -255,7 +255,7 @@ func main() {
 
 	// GET localhost:8080/api/categories
 	// POST localhost:8080/api/categories
-	http.HandleFunc("/api/categories", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/categories", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "GET" {
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(category)
@@ -287,6 +287,12 @@ func main() {
 		})
 	})
 
+	//halaman index
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html")
+		html := `<h1>Selamat Datang di Kasir API</h1>`
+		w.Write([]byte(html))
+	})
 	fmt.Println("Server running di localhost:8080")
 
 	err := http.ListenAndServe(":8080", nil)

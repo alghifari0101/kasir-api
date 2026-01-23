@@ -1,38 +1,102 @@
 # Kasir API
 
-REST API untuk sistem manajemen kasir dengan fitur CRUD Produk dan Kategori.
+## Daftar API Endpoints
 
-## Tech Stack
+### Produk
 
-- **Language**: Go (Golang)
-- **Framework**: Standard library `net/http`
-- **Storage**: In-memory (slice)
+#### 1. Get All Produk
+- **Method:** `GET`
+- **Endpoint:** `/api/produk`
+- **Deskripsi:** Mengambil semua data produk
 
-## Setup
+#### 2. Get Produk By ID
+- **Method:** `GET`
+- **Endpoint:** `/api/produk/{id}`
+- **Deskripsi:** Mengambil data produk berdasarkan ID
 
-### Requirements
-- Go 1.16+
-
-### Installation
-
-1. Clone atau download project
-```bash
-cd c:/Golang/kasir-api
+#### 3. Create Produk
+- **Method:** `POST`
+- **Endpoint:** `/api/produk`
+- **Deskripsi:** Menambahkan produk baru
+- **Body:**
+```json
+{
+  "nama": "string",
+  "harga": number,
+  "stok": number
+}
 ```
 
-2. Run project
-```bash
-go run main.go
+#### 4. Update Produk
+- **Method:** `PUT`
+- **Endpoint:** `/api/produk/{id}`
+- **Deskripsi:** Mengupdate data produk berdasarkan ID
+- **Body:**
+```json
+{
+  "nama": "string",
+  "harga": number,
+  "stok": number
+}
 ```
 
-3. Server akan berjalan di `http://localhost:8080`
+#### 5. Delete Produk
+- **Method:** `DELETE`
+- **Endpoint:** `/api/produk/{id}`
+- **Deskripsi:** Menghapus produk berdasarkan ID
 
-## API Endpoints
+---
+
+### Categories
+
+#### 6. Get All Categories
+- **Method:** `GET`
+- **Endpoint:** `/categories`
+- **Deskripsi:** Mengambil semua data kategori
+
+#### 7. Get Category By ID
+- **Method:** `GET`
+- **Endpoint:** `/categories/{id}`
+- **Deskripsi:** Mengambil data kategori berdasarkan ID
+
+#### 8. Create Category
+- **Method:** `POST`
+- **Endpoint:** `/categories`
+- **Deskripsi:** Menambahkan kategori baru
+- **Body:**
+```json
+{
+  "nama": "string",
+  "deskripsi": "string"
+}
+```
+
+#### 9. Update Category
+- **Method:** `PUT`
+- **Endpoint:** `/categories/{id}`
+- **Deskripsi:** Mengupdate data kategori berdasarkan ID
+- **Body:**
+```json
+{
+  "nama": "string",
+  "deskripsi": "string"
+}
+```
+
+#### 10. Delete Category
+- **Method:** `DELETE`
+- **Endpoint:** `/categories/{id}`
+- **Deskripsi:** Menghapus kategori berdasarkan ID
+
+---
 
 ### Health Check
-- **GET** `/health` - Status server
 
-**Response:**
+#### 11. Health Check
+- **Method:** `GET`
+- **Endpoint:** `/health`
+- **Deskripsi:** Mengecek status API
+- **Response:**
 ```json
 {
   "status": "OK",
@@ -41,266 +105,3 @@ go run main.go
 ```
 
 ---
-
-### Produk
-
-#### 1. Ambil Semua Produk
-- **GET** `/api/produk`
-
-**Response:**
-```json
-[
-  {
-    "id": 1,
-    "nama": "Indomie Godog",
-    "harga": 3500,
-    "stok": 10
-  }
-]
-```
-
-#### 2. Ambil Produk by ID
-- **GET** `/api/produk/{id}`
-- **Contoh**: `GET /api/produk/1`
-
-#### 3. Tambah Produk Baru
-- **POST** `/api/produk`
-- **Content-Type**: `application/json`
-
-**Request Body:**
-```json
-{
-  "nama": "Mie Sedaap",
-  "harga": 3500,
-  "stok": 20
-}
-```
-
-**Response (201 Created):**
-```json
-{
-  "id": 6,
-  "nama": "Mie Sedaap",
-  "harga": 3500,
-  "stok": 20
-}
-```
-
-#### 4. Update Produk
-- **PUT** `/api/produk/{id}`
-- **Contoh**: `PUT /api/produk/1`
-
-**Request Body:**
-```json
-{
-  "nama": "Indomie Updated",
-  "harga": 4000,
-  "stok": 15
-}
-```
-
-#### 5. Hapus Produk
-- **DELETE** `/api/produk/{id}`
-- **Contoh**: `DELETE /api/produk/1`
-
-**Response:**
-```json
-{
-  "message": "sukses delete"
-}
-```
-
----
-
-### Categories
-
-#### 1. Ambil Semua Kategori
-- **GET** `/api/categories`
-
-**Response:**
-```json
-[
-  {
-    "id": 1,
-    "nama": "Makanan",
-    "deskripsi": "Kategori makanan ringan dan berat"
-  }
-]
-```
-
-#### 2. Ambil Kategori by ID
-- **GET** `/api/categories/{id}`
-- **Contoh**: `GET /api/categories/1`
-
-#### 3. Tambah Kategori Baru
-- **POST** `/api/categories`
-
-**Request Body:**
-```json
-{
-  "nama": "Minuman Dingin",
-  "deskripsi": "Minuman dingin dan segar"
-}
-```
-
-**Response (201 Created):**
-```json
-{
-  "id": 4,
-  "nama": "Minuman Dingin",
-  "deskripsi": "Minuman dingin dan segar"
-}
-```
-
-#### 4. Update Kategori
-- **PUT** `/api/categories/{id}`
-- **Contoh**: `PUT /api/categories/1`
-
-**Request Body:**
-```json
-{
-  "nama": "Kategori Updated",
-  "deskripsi": "Deskripsi baru"
-}
-```
-
-#### 5. Hapus Kategori
-- **DELETE** `/api/categories/{id}`
-- **Contoh**: `DELETE /api/categories/1`
-
-**Response:**
-```json
-{
-  "message": "sukses delete"
-}
-```
-
----
-
-## Project Structure
-
-```
-kasir-api/
-├── main.go          # Main application dengan semua endpoints
-├── go.mod           # Go module file
-└── README.md        # Documentation (file ini)
-```
-
-## Data Models
-
-### Produk
-```go
-type Produk struct {
-    ID    int    `json:"id"`
-    Nama  string `json:"nama"`
-    Harga int    `json:"harga"`
-    Stok  int    `json:"stok"`
-}
-```
-
-### Categories
-```go
-type Categories struct {
-    ID        int    `json:"id"`
-    Nama      string `json:"nama"`
-    Deskripsi string `json:"deskripsi"`
-}
-```
-
-## HTTP Status Codes
-
-| Code | Meaning |
-|------|---------|
-| 200 | OK - Request berhasil |
-| 201 | Created - Data berhasil dibuat |
-| 400 | Bad Request - Request tidak valid |
-| 404 | Not Found - Data tidak ditemukan |
-
-## Error Response
-
-**Format error:**
-```json
-{
-  "error": "Pesan error"
-}
-```
-
-**Contoh:**
-```json
-{
-  "error": "Produk belum ada"
-}
-```
-
-## Testing dengan Postman
-
-### 1. GET Semua Produk
-```
-Method: GET
-URL: http://localhost:8080/api/produk
-```
-
-### 2. POST Produk Baru
-```
-Method: POST
-URL: http://localhost:8080/api/produk
-Content-Type: application/json
-
-Body:
-{
-  "nama": "Produk Baru",
-  "harga": 5000,
-  "stok": 10
-}
-```
-
-### 3. GET Produk by ID
-```
-Method: GET
-URL: http://localhost:8080/api/produk/1
-```
-
-### 4. PUT Update Produk
-```
-Method: PUT
-URL: http://localhost:8080/api/produk/1
-Content-Type: application/json
-
-Body:
-{
-  "nama": "Produk Updated",
-  "harga": 6000,
-  "stok": 5
-}
-```
-
-### 5. DELETE Produk
-```
-Method: DELETE
-URL: http://localhost:8080/api/produk/1
-```
-
-### 6. GET Semua Kategori
-```
-Method: GET
-URL: http://localhost:8080/api/categories
-```
-
-### 7. POST Kategori Baru
-```
-Method: POST
-URL: http://localhost:8080/api/categories
-Content-Type: application/json
-
-Body:
-{
-  "nama": "Kategori Baru",
-  "deskripsi": "Deskripsi kategori"
-}
-```
-
-## Author
-
-**Createdby Ramadi Sadikin for learning Go REST APIs**
-
-Last Updated: January 22, 2026
