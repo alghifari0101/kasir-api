@@ -299,28 +299,6 @@ Body:
 }
 ```
 
----
-
-## Important Notes
-
-- **Data Storage**: Semua data disimpan di in-memory (akan hilang saat server di-restart)
-- **ID Generation**: ID baru otomatis di-generate berdasarkan `len(slice) + 1`
-- **Production**: Untuk production environment, gunakan database seperti PostgreSQL, MySQL, atau MongoDB
-- **Consistency**: Gunakan bahasa yang konsisten (Indonesian atau English) untuk production
-
-## Future Improvements
-
-- [ ] Database integration (PostgreSQL/MySQL)
-- [ ] Authentication & Authorization (JWT)
-- [ ] Input validation
-- [ ] Swagger API documentation
-- [ ] Unit tests & Integration tests
-- [ ] Logging system
-- [ ] Error handling middleware
-- [ ] Rate limiting
-
----
-
 ## Author
 
 **Createdby Ramadi Sadikin for learning Go REST APIs**
